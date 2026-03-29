@@ -1,0 +1,9 @@
+# Board-specific requirements for Xilinx ZCU104 (ARM aarch64)
+# These versions have pre-built aarch64 wheels available.
+# Install on board: pip install -r requirements-board.txt
+torch==1.13.1
+torchvision==0.14.1
+Pillow>=9.0.0
+requests>=2.28.0
+tqdm>=4.65.0
+numpy>=1.24.0
