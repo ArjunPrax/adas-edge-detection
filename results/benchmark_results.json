@@ -1,0 +1,22 @@
+[
+  {
+    "device": "mps",
+    "avg_latency_ms": 57.385,
+    "min_latency_ms": 54.28,
+    "max_latency_ms": 59.988,
+    "fps": 17.43,
+    "warmup_iters": 20,
+    "timed_iters": 50,
+    "torch_version": "2.11.0"
+  },
+  {
+    "device": "cpu",
+    "avg_latency_ms": 102.819,
+    "min_latency_ms": 93.134,
+    "max_latency_ms": 185.381,
+    "fps": 9.73,
+    "warmup_iters": 20,
+    "timed_iters": 50,
+    "torch_version": "2.11.0"
+  }
+]

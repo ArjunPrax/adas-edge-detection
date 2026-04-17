@@ -231,7 +231,16 @@ def compute_map(
         n_gt = class_n_gt.get(cid, 0)
         per_class_ap[cid] = compute_ap(tp_list, n_gt)
 
-    map_score = sum(per_class_ap.values()) / len(per_class_ap) if per_class_ap else 0.0
+    # mAP averaged over ADAS classes only (person=1, car=3, bus=6, truck=8)
+    # Averaging over all detected classes would include non-ADAS spurious detections
+    # and deflate the score unfairly.
+    ADAS_CLASS_IDS = {1, 3, 6, 8}
+    adas_aps = [ap for cid, ap in per_class_ap.items() if cid in ADAS_CLASS_IDS]
+    # Any ADAS class with zero detections gets AP=0 in the mean
+    for cid in ADAS_CLASS_IDS:
+        if cid not in per_class_ap:
+            adas_aps.append(0.0)
+    map_score = sum(adas_aps) / len(ADAS_CLASS_IDS)
     return {"per_class_ap": per_class_ap, "map": map_score}
 
 
