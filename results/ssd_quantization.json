@@ -1,0 +1,28 @@
+{
+  "model": "SSD300-VGG16",
+  "dataset": "COCO val2017 (100 ADAS images)",
+  "iou_threshold": 0.5,
+  "detection_threshold": 0.1,
+  "calib_images": 50,
+  "conv_layers_quantized": 35,
+  "fp32": {
+    "map_at_50": 0.3848,
+    "per_class_ap": {
+      "1": 0.6056,
+      "3": 0.4712,
+      "6": 0.3455,
+      "8": 0.1169
+    }
+  },
+  "int8_simulated": {
+    "map_at_50": 0.39,
+    "per_class_ap": {
+      "1": 0.6076,
+      "3": 0.4886,
+      "6": 0.3471,
+      "8": 0.1169
+    }
+  },
+  "map_drop": -0.0053,
+  "map_drop_pct": -1.37
+}
