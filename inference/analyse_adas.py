@@ -178,18 +178,22 @@ def plot_threshold_sweep(thresholds, map_scores, out_path):
     print(f"  Saved: {out_path}")
 
 
+def ap_from_pr(precs: np.ndarray, recs: np.ndarray) -> float:
+    """11-point interpolation AP directly from precision/recall arrays."""
+    ap = 0.0
+    for t in np.linspace(0, 1, 11):
+        mask = recs >= t
+        ap += precs[mask].max() if mask.any() else 0.0
+    return ap / 11.0
+
+
 def plot_pr_curves(all_detections, gt_by_file, out_path):
     colors = {1: '#e74c3c', 3: '#3498db', 6: '#f39c12', 8: '#2ecc71'}
     fig, ax = plt.subplots(figsize=(7, 5))
 
     for cid, name in ADAS_CLASSES.items():
         precs, recs = pr_curve_data(all_detections, gt_by_file, cid)
-        ap = compute_ap(
-            list(zip([0.5]*len(precs), precs >= 0.5)),   # dummy — use full curve
-            sum(1 for gbs in gt_by_file.values()
-                for g in gbs if g["category_id"] == cid)
-        )
-        # Use 11-point interpolation AP from the main compute
+        ap = ap_from_pr(precs, recs)
         ax.plot(recs, precs, color=colors[cid], linewidth=2,
                 label=f'{name} (AP={ap:.3f})')
 
