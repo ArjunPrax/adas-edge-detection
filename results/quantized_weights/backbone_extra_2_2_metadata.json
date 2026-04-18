@@ -1,0 +1,19 @@
+{
+  "weight_scale": 0.0007797307151509082,
+  "weight_zero_point": 0.0,
+  "activation_scale": 0.06833544273076096,
+  "in_channels": 128,
+  "out_channels": 256,
+  "kernel_size": [
+    3,
+    3
+  ],
+  "stride": [
+    2,
+    2
+  ],
+  "padding": [
+    1,
+    1
+  ]
+}
